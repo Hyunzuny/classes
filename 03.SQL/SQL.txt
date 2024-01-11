@@ -1,0 +1,24 @@
+SQL
+
+데이터베이스(DBMS) = 지속적으로 유지, 관리되야 하는 데이터 집합.
+
+CRUD - creat , read, update, delete
+            저장   조회   수정   삭제
+
+DML
+DDL
+CREAT - CREAT DATABASE 이름
+	    SHOW DATABASES 조회
+	    USE 이름
+
+CREATE USER 계정명@HOST IDENTIFIED BY 'PASSWORD'
+#HOST
+ - localhost : 로컬 접속계정
+ - "%" : 원격 접속 계정
+
+DCL - GRANT(권한 주기)
+         REVOK(권한 없애기)        
+
+테이블생성 - 데이터타입
+문자열 타입 - 대부분 varchar(n) 쓴다.
+                 -작은따옴표를 쓴다(')

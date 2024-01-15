@@ -1,3 +1,5 @@
+use test;
+select salary from emp;
 /* **************************************************************************
 집계(Aggregation) 함수와 GROUP BY, HAVING
 ************************************************************************** */
@@ -26,31 +28,47 @@
 	- 일시타입 컬럼은 오래된 값일 수록 작은 값이다.
 
 ******************************************************************************************* */
+select count(comm_pct), count(emp_id), avg(comm_pct) from emp;  -- null 빼고 계산
+
+select avg(comm_pct), avg(ifnull(comm_pct , 0)) from emp;    -- avg null 일때 , avg null = 0 일때
 
 -- EMP 테이블에서 급여(salary)의 총합계, 평균, 최소값, 최대값, 표준편차, 분산, 총직원수를 조회 
-
+select sum(salary) '총합계'
+,round(avg(salary), 2) '평균'     -- 소숫점 두째짜리까지 반올림
+, round(avg(ifnull(salary, 0)),2) '평균ifnull' 
+, min(salary) '최소값'
+, max(salary) '최대값'
+, stddev(salary) '표준편차'
+, variance(salary) '분산' -- 표준편차 제곱
+, count(salary) '총직원수'
+, count(*) '총 행수'
+from emp;
 
 -- EMP 테이블에서 가장 최근 입사일(hire_date)과 가장 오래된 입사일을 조회
-
+select max(hire_date), min(hire_date) from emp;
 
 -- EMP 테이블의 부서(dept_name) 의 개수를 조회
-
+select count(dept_name),
+		count(ifnull(dept_name, '1')) from emp;
 
 -- EMP 테이블에서 job 종류의 개수 조회
+select count(distinct job) from emp;
 
-
+select cast('2020-10-10' as date) < cast('2022-10-10' as date) 'aaa';
 
 -- TODO:  커미션 비율(comm_pct)이 있는 직원의 수를 조회
-
+select count(comm_pct) from emp;
 
 -- TODO:  커미션 비율(comm_pct)의 평균을 조회. 
-
+select round(avg(ifnull(comm_pct,0)), 2) from emp;
 
 -- TODO: 급여(salary)에서 최고 급여액과 최저 급여액의 차액을 출력
-
+select max(salary) , min(salary) from emp;
 
 -- TODO: 가장 긴 이름(emp_name)이 몇글자 인지 조회.
+select max(char_length(emp_name)) from emp;
 
+select emp_name from emp;
 
 -- TODO: EMP 테이블의 부서(dept_name)가 몇종류가 있는지 조회. 
 
@@ -66,21 +84,52 @@ group by 절
 	- select 절에는 group by 에서 선언한 컬럼들만 집계함수와 같이 올 수 있다.
 	
 ****************/
+-- 집계할 때 select 절에 올 수 있는 컬럼 - 그룹으로 묶을때 사용한 컬럼만 가능.
+select
+sum(salary) "합계"
+,round(avg(salary) , 2) "평균"
+,min(salary) "최소"
+,max(salary) "최대"
+,round(stddev(salary) , 2) "표준편차"
+,round(variance(salary), 2) "분산"
+,count(*) "직원수"
+from emp;
+
 
 -- 업무(job)별 급여의 총합계, 평균, 최소값, 최대값, 표준편차, 분산, 직원수를 조회
-
+select job
+,sum(salary) "합계"
+,round(avg(salary) , 2) "평균"
+,min(salary) "최소"
+,max(salary) "최대"
+,round(stddev(salary) , 2) "표준편차"
+,round(variance(salary), 2) "분산"
+,count(*) "직원수"
+from emp
+group by job; -- 업무별 집계 ==> job 컬럼의 값이 가튼 행들이 하나의 그룹으로 묶인다.
+			  -- 순서 select from where group by
 
 -- 입사연도 별 직원들의 급여 평균.
-
+select round(avg(salary), 2) "평균급여",year(hire_date)  -- 입사년도 
+from emp
+group by year(hire_date)
+order by 1;
 
 -- 부서명(dept_name) 이 'Sales'이거나 'Purchasing' 인 직원들의 업무별 (job) 직원수를 조회
-
+select job, count(*), count(job)
+from emp 
+where dept_name = "Sales" or dept_name = "Purchasing"
+group by job;
 
 -- 부서(dept_name), 업무(job) 별 최대, 평균급여(salary)를 조회.
-
-
+select dept_name, job, round(avg(salary), 2)
+from emp
+group by dept_name, job
+order by 1;
 -- 급여(salary) 범위별 직원수를 출력. 급여 범위는 10000 미만,  10000이상 두 범주.
-
+select if(salary >=10000, '만달러 이상', '만달러 미만'), avg(salary)
+from emp
+group by if(salary >=10000, '만달러 이상', '만달러 미만');
 
 
 -- TODO: 부서별(dept_name) 직원수를 조회

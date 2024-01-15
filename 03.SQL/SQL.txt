@@ -20,5 +20,15 @@ DCL - GRANT(권한 주기)
          REVOK(권한 없애기)        
 
 테이블생성 - 데이터타입
-문자열 타입 - 대부분 varchar(n) 쓴다.
-                 -작은따옴표를 쓴다(')
+#문자열 타입 -varchar(n)
+                   - 작은따옴표를 쓴다(')
+#정수타입 - int
+#실수타입 - double
+
+
+pk(프라이머리키) 
+
+select from wher order by : order by : 정렬
+
+asc = 오름차순
+dasc = 내림차순

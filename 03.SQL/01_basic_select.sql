@@ -199,9 +199,14 @@ where salary between 4000 and 8000;
 
 -- TODO: EMP 테이블에서 2004년에 입사한 직원들의 ID(emp_id), 이름(emp_name), 입사일(hire_date)을 조회.
 -- 참고: date/datatime에서 년도만 추출: year(컬럼명)
-select emp_id, emp_name, hire_date 'year'
+select emp_id, emp_name, year(hire_date) 'year'
+from emp
+where year(hire_date) = 2004;
+
+select hire_date
 from emp
 where hire_date like '2004%';
+
 
 -- TODO: EMP 테이블에서 직원의 ID(emp_id)가 110, 120, 130 인 직원의  ID(emp_id), 이름(emp_name), 업무(job)을 조회
 select emp_id, emp_name, job
@@ -253,22 +258,33 @@ where salary * 12 >= 200000;
  *******************************************/
  
 -- EMP 테이블에서 업무(job)가 'SA_REP' 이고 급여(salary)가 $9,000인 직원의 직원의 ID(emp_id), 이름(emp_name), 업무(job), 급여(salary)를 조회.
-
+select emp_id, emp_name, job, salary from emp where job = 'SA_REP' 
+and salary >= '9000';
 
 -- EMP 테이블에서 업무(job)가 'FI_ACCOUNT' 거나 급여(salary)가 $8,000 이상인 직원의 ID(emp_id), 이름(emp_name), 업무(job), 급여(salary)를 조회.
-
+select emp_id, emp_name, job, salary
+from emp
+where job = 'FI_ACCOUNT' or salary >= 8000;
 
 -- TODO: EMP 테이블에서 부서(dept_name)가 'Sales'이고 업무(job)가 'SA_MAN'이고 급여가 $13,000 이하인 
 --       직원의 ID(emp_id), 이름(emp_name), 업무(job), 급여(salary), 부서(dept_name)를 조회
-
+select emp_id, emp_name, job, salary, dept_name
+from emp
+where dept_name ='Sales' and job ='SA_MAN' and salary <=13000;
 
 -- TODO: EMP 테이블에서 업무(job)에 'MAN'이 들어가는 직원들 중에서 부서(dept_name)가 'Shipping' 이고 2005년이후 입사한 
 --       직원들의 ID(emp_id), 이름(emp_name), 업무(job), 입사일(hire_date),부서(dept_name)를 조회
 
+select emp_id, emp_name, job, hire_date , dept_name
+from emp
+where dept_name = 'Shipping' and hire_date like '2005%' and job like '%MAN%';
 
 -- TODO: EMP 테이블에서 입사년도가 2004년인 직원들과 (입사년도와 상관없이) 급여가 $20,000 이상인 
 --       직원들의 ID(emp_id), 이름(emp_name), 입사일(hire_date), 급여(salary)를 조회.
-
+select emp_name, emp_id, job, salary, hire_date
+from emp
+where hire_date like '2004%' or salary >= 20000
+order by 1;
 
 -- TODO : EMP 테이블에서, 부서이름(dept_name)이  'Executive'나 'Shipping' 이면서 급여(salary)가 6000 이상인 직원들의 모든 정보 조회. 
 

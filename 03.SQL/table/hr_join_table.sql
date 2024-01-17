@@ -1,6 +1,7 @@
--- CREATE DATABASE hr_join;
--- USE  hr_join;
 
+-- CREATE DATABASE hr_join;
+USE  hr_join;
+select * from dept;
 -- set foreign_key_checks=0;
 
 -- ------------------------------------------------------
@@ -97,7 +98,7 @@ CREATE TABLE emp(
     CONSTRAINT fk_emp_job FOREIGN KEY(job_id) REFERENCES job(job_id) ON DELETE SET NULL,
     CONSTRAINT fk_emp_mgr FOREIGN KEY(mgr_id) REFERENCES emp(emp_id) ON DELETE SET NULL
 );
-
+select * from emp;
 INSERT INTO emp (emp_id,emp_name,job_id,mgr_id,hire_date,salary,comm_pct,dept_id) VALUES (100,'Steven','AD_PRES',null,CAST('03/06/17' AS DATE),24000,null,90);
 INSERT INTO emp (emp_id,emp_name,job_id,mgr_id,hire_date,salary,comm_pct,dept_id) VALUES (101,'Neena','AD_VP',100,CAST('05/09/21' AS DATE),17000,null,90);
 INSERT INTO emp (emp_id,emp_name,job_id,mgr_id,hire_date,salary,comm_pct,dept_id) VALUES (102,'Lex','AD_VP',100,CAST('01/01/13' AS DATE),17000,null,90);

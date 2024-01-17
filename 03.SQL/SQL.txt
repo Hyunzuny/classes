@@ -28,7 +28,44 @@ DCL - GRANT(권한 주기)
 
 pk(프라이머리키) 
 
-select from wher order by : order by : 정렬
+select from where order by : order by : 정렬
 
+2024 - 1 -12 금 배운내용
 asc = 오름차순
 dasc = 내림차순
+
+1.함수
+-문자열
+-숫자
+-날짜 ex) now(), adddate,subdate(k interval 값 단위)
+-ifnull(컬럼값, 기본값), if(조건수식, 참, 거짓)
+avg(ifnull(%, 0))
+-타입변환 cast convert
+- case
+
+2.집계함수
+2-1.group by
+ 순서 ; -- select from where group by
+
+stddev() : 표준편차
+variance() : 분산
+
+다시볼것.
+
+select job,
+count(*)
+from emp
+group by job with rollup; -- with rollup => group by를 하지 않고 집계한 결과를 마지막에 붙여준다.
+
+where 행을 선택
+having 그룹을 선택
+
+foreign key 다시보기.
+
+self join
+
+삼바리 있는쪽이 자식 테이블
+
+
+
+

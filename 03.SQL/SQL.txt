@@ -64,6 +64,11 @@ foreign key 다시보기.
 
 self join
 
+import sys
+	math
+
+find 함수
+
 삼바리 있는쪽이 자식 테이블
 
 

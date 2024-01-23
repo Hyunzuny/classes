@@ -1,0 +1,69 @@
+설치
+pip install xlrd
+pip install scipy
+
+
+[f"{y}년" for y in range(2009,2018)] 패션코딩 for
+많이쓰는것
+
+s2.value_counts()   #각 범주값(class)의 개수를 확인, 무진장 중요.
+
+dataframe
+만들기 - 저장 - 읽기 - 정보조회
+
+fancy 인덱싱 , inplace
+
+
+
+
+데이터프레임 조회
+loc 은 이름으로
+iloc 은 순번으로 
+#불리언 인덱싱은 무조건 행 조회.
+
+df.groupby(["AIRLINE" ,"ORG_AIR"])['CANCELLED'].sum()
+                   인덱스        컬럼
+
+tips[tips['sex']=='Female']  : sex == true
+value_counts()
+sort_index
+axis  = 0 or 1 => 컬럼위치로 정렬
+0 : 컬럼방향(아래)
+1 : 행방향(오른쪽으로) #columns
+사용처 : 컬럼별로 집계 or 행별로 집계
+행렬 정렬
+
+sort_values
+df.sort_values("director_name", ascending= False, inplace=TT)
+값 정렬
+
+labels 공부
+numeric_only = True  <= 숫자만 지정할 때
+-중요
+df.pivot_table(index = "AIRLINE",            #그룹바이 대상 중 인덱스
+               columns = "ORG_AIR",          #그룹바이 대상 중 컬럼
+               values = "CANCELLED",         #집계대상 컬럼
+               aggfunc = "sum",               #집계함수(defalt : mean)
+               margins = True                #행 / 열 별 총 집계  
+              )
+
+집계는 3가지 기억
+어그리계이션, 그룹바이, 피버테이블
+df['num_critic_for_reviews'].agg(['min', 'max'])  -> 어그리게이션 agg
+
+연습
+롤을 주고 하자
+
+apply(함수())
+
+
+같은행끼리 합칠 때 조인, 머지
+
+
+
+
+시각화
+plt
+ converters={"date":str} ???
+
+seaborn 다양한 그래프 사용 내부적으로 메트프롤립 사용

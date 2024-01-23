@@ -1,0 +1,39 @@
+df['AA'].unique() #요소값 이름들
+df['AA'].nunique() #요소값 이름들 개수
+
+df.sum(numeric_only = True)  #숫자 컬럼만 계산할 때
+df.mean() 은 숫자형만 가능.
+
+df['AA'].agg(['min', 'max']) #agg : 함수 중복 기능
+df['AA'].agg(lambda col : col.max() - col.min())  #agg 람다 사용
+
+groupby
+k = df.groupby('AA') #'AA' 는 str일때 보통 사용.
+k.sum()  #'AA'의 각 컬럼별 함수(sum)적용
+
+k = df.groupby("ORG_AIR")
+k[['WEEKDAY', 'AIR_TIME']].mean()
+k[['WEEKDAY', 'AIR_TIME']].agg(['min', 'max']) #agg 사용 가능
+
+피벗테이블
+df.pivot_table(index = 'AIRLINE',
+              columns = 'ORG_AIR',
+              values = 'CANCELLED',
+              aggfunc = 'sum',
+	      fill_value = 'na 채울값'
+	      dropna = T/F   : 컬럼전체 NA인 경우 제거
+              margins = T/F  : 총계 여부
+              margins_name = '총계이름'
+              )
+
+apply
+def func1(value):
+    return value + 10
+
+df[['C1','C2']].apply(func1)   'C1','C2' 각각 열에 func1 함수 적용.
+
+a = pd.cut(df['age'],
+          bins = 3,
+          right = True,     #오른쪽이 T면 ], F면 왼쪽이 [
+          labels = ['하', '중', '상']
+          )

@@ -64,10 +64,17 @@ foreign key 다시보기.
 
 self join
 
+
+파이썬-
 import sys
 	math
-
 find 함수
+-
+
+
+공백은 한칸 뛰운다
+
+gcd(a: int, b: int) -> int
 
 삼바리 있는쪽이 자식 테이블
 
